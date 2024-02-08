@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Quiz</title>
+  <style>
+    body {
+  font-family: 'Arial', sans-serif;
+  background-color: rgb(0, 0, 0);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#quiz-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 5px 10px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+button:hover{
+    background-color: rgb(172, 172, 172);
+}
+
+  </style>
+</head>
+<body>
+    <!--
+        ANSWERS
+        1. Cherry Blossom
+        2. Constantinople
+        3. Adolf Hitler
+        4. 46
+        5. 365
+    -->
+
+  <div id="quiz-container">
+    <h3>Interactive Quiz</h3>
+    <div id="question-container">
+      <p id="question-text"></p>
+      <input type="text" id="user-answer" placeholder="Type your answer">
+      <button onclick="checkAnswer()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+    { question: "What’s the national flower of Japan?", answer: "Cherry Blossom" },
+    { question: "Until 1923, what was the Turkish city of Istanbul called?", answer: "Constantinople" },
+    { question: "Who is the leader of the Nazi", answer: "Adolf Hitler" },
+    { question: "How many chromosomes do humans have", answer: "46" },
+    { question: "How many days does it take for the Earth to orbit the Sun?", answer: "365" }
+  ];
+  
+  let currentQuestion = 0;
+  
+  function showQuestion() {
+    const questionText = document.getElementById("question-text");
+    questionText.textContent = questions[currentQuestion].question;
+  }
+  
+  function checkAnswer() {
+    const userAnswer = document.getElementById("user-answer").value.toLowerCase();
+    const correctAnswer = questions[currentQuestion].answer.toLowerCase();
+  
+    if (userAnswer === correctAnswer) {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion();
+        document.getElementById("user-answer").value = "";
+      } else {
+        alert("Congratulations");
+      }
+    } else {
+      alert("Wrong!!");
+      currentQuestion = 0;
+      showQuestion();
+      document.getElementById("user-answer").value = "";
+    }
+  }
+  
+  
+  showQuestion();
+  </script>
+</body>
+</html>
